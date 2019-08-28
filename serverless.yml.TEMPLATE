@@ -1,0 +1,31 @@
+service:
+  name: overland-lambda
+
+custom:
+  bucket: BUCKET-NAME HERE
+  token: TOKEN FOR APP HERE
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+
+functions:
+  submitBatch:
+    handler: handler.submitBatch
+    environment:
+      BUCKET: ${self:custom.bucket}
+      TOKEN: ${self:custom.token}
+    events:
+      - http:
+          method: post
+          path: submitBatch
