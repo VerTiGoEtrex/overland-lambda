@@ -1,5 +1,4 @@
-service:
-  name: overland-lambda
+service: overland-lambda
 
 custom:
   bucket: BUCKET-NAME HERE
