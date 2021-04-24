@@ -16,7 +16,7 @@ def loadAllFiles(path: Path) -> List[Dict[str, Any]]:
             for future in futures.as_completed(pool.submit(overlandJSONToObjs, path) for path in json_files):
                 results.extend(future.result())
                 pbar.update(1)
-    return results
+    return [obj for obj in results if obj is not None]
 
 def overlandJSONToObjs(filepath: str) -> List[Dict[str, Any]]:
     """
@@ -40,6 +40,7 @@ def _transformJSONtoobj(obj) -> Dict[str, Any]:
         'hacc': props["horizontal_accuracy"] if "horizontal_accuracy" in props else None,
         'wifi': props["wifi"] if props["wifi"] != "" else None,
         'batt': props["battery_level"] if "battery_level" in props else None,
+        'batt_state': props["battery_state"] if "battery_state" in props else "unknown",
         'mot': props["motion"] if "motion" in props else [],
         'speed': props["speed"] if "speed" in props else None,
         'lat': geom["coordinates"][1],
