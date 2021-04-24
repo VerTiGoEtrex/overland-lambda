@@ -8,6 +8,7 @@ authors = ["Noah Crocker <vertigoetrex@users.noreply.github.com>"]
 python = "^3.8"
 pandas = "^1.2.4"
 tqdm = "^4.60.0"
+pyarrow = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

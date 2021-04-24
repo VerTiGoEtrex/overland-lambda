@@ -1,3 +1,4 @@
 /.ipynb_checkpoints/
 /dl/
 **/__pycache__/
+/out.arrow
