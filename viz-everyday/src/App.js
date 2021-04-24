@@ -1,10 +1,13 @@
 import './App.css';
 
-import React, {useState, useMemo} from 'react';
+import React, {useState, useEffect} from 'react';
 import DeckGL from '@deck.gl/react';
 import {ScatterplotLayer} from '@deck.gl/layers';
 import {StaticMap} from 'react-map-gl';
 import {BASEMAP} from '@deck.gl/carto';
+
+import { Table } from "apache-arrow";
+
 
 
 
@@ -18,8 +21,21 @@ const INITIAL_VIEW_STATE = {
 };
 
 function App() {
+  const [data, setData] = useState({ hits: [] });
+  useEffect(async () => {
+    console.log("fetching out.arrow")
+    const table = await Table.from(fetch("out.arrow"));
+    console.log(table);
+    // days = {}
+
+    // setData(result.data);
+  });
  
   const layers = [
+    new ScatterplotLayer({
+      id: 'scatter',
+
+    })
     // new GeoJsonLayer({
     //   id: 'geojson',
     //   data,
