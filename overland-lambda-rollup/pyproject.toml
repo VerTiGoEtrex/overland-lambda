@@ -6,6 +6,7 @@ authors = ["Noah Crocker <vertigoetrex@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pandas = "^1.2.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
