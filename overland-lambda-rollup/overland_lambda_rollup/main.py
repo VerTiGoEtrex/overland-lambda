@@ -21,8 +21,8 @@ def main():
     df['ts'] = pd.to_datetime(df['ts'])
     logging.info("sort")
     df.sort_values('ts', ignore_index=True, inplace=True)
-    logging.info("ts to epoch")
-    df["ts"] = df["ts"].astype('int64')//1e9
+    # logging.info("ts to epoch")
+    # df["ts"] = df["ts"].astype('int64')//1e9
     print(df)
     print(df.dtypes)
     print(df.describe())
