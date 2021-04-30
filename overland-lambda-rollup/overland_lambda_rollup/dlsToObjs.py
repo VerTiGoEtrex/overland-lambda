@@ -41,7 +41,7 @@ def _transformJSONtoobj(obj) -> Dict[str, Any]:
         'wifi': props["wifi"] if props["wifi"] != "" else None,
         'batt': props["battery_level"] if "battery_level" in props else None,
         'batt_state': props["battery_state"] if "battery_state" in props else "unknown",
-        'mot': props["motion"] if "motion" in props else [],
+        # 'mot': props["motion"] if "motion" in props else [],
         'speed': props["speed"] if "speed" in props else None,
         'lat': geom["coordinates"][1],
         'lon': geom["coordinates"][0],
