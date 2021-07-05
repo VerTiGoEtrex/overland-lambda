@@ -1,14 +1,19 @@
+from dataclasses import dataclass
 from .dlsToObjs import loadAllFiles
 from pathlib import Path
 import pandas as pd
 import logging
 import os
 import pyarrow as pa
-from tqdm import tqdm
+# from tqdm import tqdm
+from tqdm.rich import tqdm
 import click
 import filetype
 from rich.logging import RichHandler
 from rich.prompt import Confirm
+import ffmpeg
+from PIL import Image
+from PIL.ExifTags import TAGS
 
 FORMAT = "%(message)s"
 logging.basicConfig(
@@ -18,6 +23,11 @@ logging.basicConfig(
     datefmt="[%X]",
 )
 
+
+@dataclass
+class TimelineEntry:
+    ts: int
+    path: Path
 
 
 @click.command()
@@ -56,6 +66,31 @@ def handle_media(media_tree_dir):
     assert Confirm.ask("Continue?")
 
     # Create a timeline
+    timeline = []
+    for image in tqdm(images, desc="Probing photos"):
+        logging.info(image)
+        im = Image.open(image)
+        exifdata = im.getexif()
+        # iterating over all EXIF data fields
+        for tag_id in exifdata:
+            # get the tag name, instead of human unreadable tag id
+            tag = TAGS.get(tag_id, tag_id)
+            data = exifdata.get(tag_id)
+            # decode bytes 
+            # if isinstance(data, bytes):
+                # data = data.decode()
+            # logging.info(f"{tag:25}: {data}")
+
+    # for video in tqdm(videos, desc="Probing videos"):
+    #     x = ffmpeg.probe(video)
+    #     logging.info(x['format']['tags'].keys())
+    #     if 'com.apple.quicktime.creationdate' in x['format']['tags']:
+    #         logging.info(x['format']['tags']['com.apple.quicktime.creationdate'])
+    #     if 'creation_time' in x['format']['tags']:
+    #         logging.info(x['format']['tags']['creation_time'])
+    #     else:
+    #         logging.info(f"MISSING CREATION TIME: {video}")
+
 
 
 
