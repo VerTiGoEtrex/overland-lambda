@@ -8,6 +8,7 @@ from tqdm import tqdm
 import click
 import filetype
 from rich.logging import RichHandler
+from rich.prompt import Confirm
 
 FORMAT = "%(message)s"
 logging.basicConfig(
@@ -25,8 +26,8 @@ def handle_media(media_tree_dir):
     """
     Enumerates media locally or on S3, converts to p-dash, creates timeline, and optionally uploads to S3
     """
-    logging.info("enumerating all media")
 
+    logging.info("enumerating all media")
     source_path = Path(media_tree_dir)
     other_types = {}
     videos = []
@@ -52,8 +53,9 @@ def handle_media(media_tree_dir):
     logging.info(f"videos, {len(videos)}")
     logging.info(f"images {len(images)}")
 
+    assert Confirm.ask("Continue?")
 
-
+    # Create a timeline
 
 
 
