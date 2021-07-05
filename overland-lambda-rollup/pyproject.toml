@@ -14,6 +14,7 @@ filetype = "^1.0.7"
 rich = "^10.4.0"
 ffmpeg-python = "^0.2.0"
 Pillow = "^8.3.0"
+pyheif-pillow-opener = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

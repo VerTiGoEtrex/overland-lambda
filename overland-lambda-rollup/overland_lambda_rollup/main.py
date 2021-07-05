@@ -14,6 +14,8 @@ from rich.prompt import Confirm
 import ffmpeg
 from PIL import Image
 from PIL.ExifTags import TAGS
+from pyheif_pillow_opener import register_heif_opener
+register_heif_opener()
 
 FORMAT = "%(message)s"
 logging.basicConfig(
