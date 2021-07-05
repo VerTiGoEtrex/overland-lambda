@@ -44,7 +44,3 @@ def main():
             writer.write_batch(batch)
     
     logging.info("done")
-
-
-if __name__ == '__main__':
-    main()
